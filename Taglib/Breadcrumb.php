@@ -87,7 +87,7 @@ class Breadcrumb implements \Weline\Taglib\TaglibInterface
             self::getHtml($menu, $name_field, $action_field, $current_html);;
             $menu->getParentPaths($model, $field, $parent_field, $order_field, $sort);
             $parent = $menu->getData('parents')[0] ?? [];
-            self::breadcrumb($parent, $html, $action_field, $name_field);
+            if ($parent) self::breadcrumb($parent, $html, $action_field, $name_field);
             $html .= "{$current_html}</ol>";
             return $html;
         };
@@ -155,9 +155,9 @@ DOC
         $name    = __($parent[$name_field]);
         $request = self::getRequest();
         if (!empty($parent[$action_field])) {
-            if($request->isBackend()){
+            if ($request->isBackend()) {
                 $action = $request->getUrlBuilder()->getBackendUrl($parent[$action_field]);
-            }else{
+            } else {
                 $action = $request->getUrlBuilder()->getUrl($parent[$action_field]);
             }
         } else {
