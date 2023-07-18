@@ -81,8 +81,11 @@ class Breadcrumb implements \Weline\Taglib\TaglibInterface
 
             $html = '<ol class=\'breadcrumb m-0\'>';
             /**@var \Weline\Framework\Database\Model $model */
-            $model        = ObjectManager::getInstance($model);
-            $menu         = $model->reset()->where($action_field, $path)->find()->fetch();
+            $model = ObjectManager::getInstance($model);
+            $menu  = $model->reset()->where($action_field, $path)->find()->fetch();
+            if (!$menu->getId()) {
+                return '';
+            }
             $current_html = '';
             self::getHtml($menu, $name_field, $action_field, $current_html);;
             $menu->getParentPaths($model, $field, $parent_field, $order_field, $sort);
