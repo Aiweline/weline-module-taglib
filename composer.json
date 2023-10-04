@@ -3,7 +3,8 @@
   "description": "WelineFramework taglib module",
   "type": "weline-module",
   "require": {
-    "php": "^8.1"
+    "php": "^8.1",
+    "weline/framework": "v1.3"
   },
   "authors": [
     {
