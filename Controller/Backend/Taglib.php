@@ -19,6 +19,10 @@ class Taglib extends BackendController
     #[Acl('Weline_Taglib::taglib_listing', '标签列表', 'fa fa-list', '标签列表')]
     public function listing()
     {
+        if ($q = $this->request->getGet('q')) {
+            $this->taglib->where('main_table.name', "%$q%", 'like', 'or')
+                ->where('module.name', "%$q%", 'like', 'and');
+        }
         $listing = $this->taglib
             ->joinModel(Module::class, 'module', 'main_table.module_id=module.module_id')
             ->pagination()
