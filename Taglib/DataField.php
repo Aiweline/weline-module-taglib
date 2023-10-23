@@ -137,6 +137,21 @@ $(function (){
                                 let eleKey = scope_ele.getAttribute('name')
                                 if(scope === eleScope && key[0] === eleKey){
                                     let target = $('*[scope=\"'+scope+'\"][name=\"'+key[0]+'\"]')
+                                    switch (target.attr('type')) {
+                                        case 'checkbox':
+                                            if(key[1]){
+                                                target.prop('checked', true)
+                                            }
+                                            break;
+                                        case 'radio':
+                                            if(key[1]){
+                                                target.prop('checked', true)
+                                            }
+                                            break;
+                                        default:
+                                            target.val(key[1])
+                                            break;                                        
+                                    }
                                     target.val(key[1])
                                     target.trigger('change')
                                 }
