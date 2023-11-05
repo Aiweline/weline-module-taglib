@@ -94,6 +94,8 @@ $(function (){
         // jquery检测所有带了scope属性的元素
         scope_eles.on('input', debounce(function(e){
                 let target = $(e.target)
+                // 检查输入框类型
+                
                 let value = target.val()
                 let scope = target.attr('scope')
                 let name = target.attr('name')
@@ -152,7 +154,6 @@ $(function (){
                                             target.val(key[1])
                                             break;                                        
                                     }
-                                    target.val(key[1])
                                     target.trigger('change')
                                 }
                             }
@@ -180,7 +181,12 @@ $(function (){
         }
     });
     // 开始观察指定的节点，需要在回调函数外部做这个调用
-    observer.observe(document.getElementById('$container_id'), { childList: true, subtree: true });
+    let container = document.getElementById('$container_id')
+    if(!container){
+        observer.observe(document.body, { childList: true, subtree: true });
+    }else{
+        observer.observe(container, { childList: true, subtree: true });
+    }
 })
 </script>";
         };
