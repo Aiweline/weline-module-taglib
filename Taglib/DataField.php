@@ -92,7 +92,7 @@ $(function (){
             }
         }
         // jquery检测所有带了scope属性的元素
-        scope_eles.on('input', debounce(function(e){
+        scope_eles.on('input change', debounce(function(e){
                 let target = $(e.target)
                 // 检查输入框类型
                 let value = target.val()
