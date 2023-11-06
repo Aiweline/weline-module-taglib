@@ -95,10 +95,14 @@ $(function (){
         scope_eles.on('input', debounce(function(e){
                 let target = $(e.target)
                 // 检查输入框类型
-                
                 let value = target.val()
                 let scope = target.attr('scope')
                 let name = target.attr('name')
+                switch (target.attr('type')){
+                    case 'textarea':
+                        value = target.textContent;
+                        break;
+                }
                 let url = '{$url}'
                     $.ajax({
                     url: url,
@@ -141,17 +145,25 @@ $(function (){
                                     let target = $('*[scope=\"'+scope+'\"][name=\"'+key[0]+'\"]')
                                     switch (target.attr('type')) {
                                         case 'checkbox':
-                                            if(key[1]){
+                                            // 检测是否被选中
+                                            if(key[1] && target.value ===''){
                                                 target.prop('checked', true)
                                             }
                                             break;
+                                        case 'textarea':
+                                            if(key[1] && target.textContent ===''){
+                                                target.textContent = key[1]
+                                            }
+                                            break;
                                         case 'radio':
-                                            if(key[1]){
+                                            if(key[1] && target.checked ===''){
                                                 target.prop('checked', true)
                                             }
                                             break;
                                         default:
-                                            target.val(key[1])
+                                            if(target.val()===''){
+                                                target.val(key[1])
+                                            }
                                             break;                                        
                                     }
                                     target.trigger('change')
