@@ -38,7 +38,7 @@ class DataField implements TaglibInterface
      */
     public static function attr(): array
     {
-        return ['container-id' => true, 'url' => true];
+        return ['container-id' => true, 'url' => true, 'event' => false];
     }
 
     /**
@@ -71,6 +71,7 @@ class DataField implements TaglibInterface
             if (empty($container_id)) {
                 throw new Exception(__('DataField 标签属性 container-id 不能为空！'));
             }
+            $event = $attributes['event']??'input change';
             # 自动保存模板
             return "
 <script>
@@ -92,8 +93,8 @@ $(function (){
             }
         }
         // jquery检测所有带了scope属性的元素
-        scope_eles.on('input change', debounce(function(e){
-                let target = $(e.target)
+        scope_eles.on('$event', debounce(function(e){
+                let target = $(this)
                 // 检查输入框类型
                 let value = target.val()
                 let scope = target.attr('scope')
@@ -102,6 +103,9 @@ $(function (){
                     case 'textarea':
                         value = target.textContent;
                         break;
+                }
+                if(!value){
+                    value = target.attr('value')
                 }
                 let url = '{$url}'
                     $.ajax({
