@@ -12,7 +12,7 @@ $themeConfig = \Weline\Framework\Manager\ObjectManager::getInstance(\Weline\Back
 -->
 <html lang='en' <?= ('rtl' === $themeConfig->getThemeModel()) ? " dir=\"rtl\"" : '' ?>>
 <head>
-    @template(Gvanda_Base::/backend/head/base.phtml)
+    @template(Weline_Admin::common/head.phtml)
     <title><?= __('标签文档信息') ?></title>
 </head>
 
