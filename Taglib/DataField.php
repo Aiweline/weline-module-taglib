@@ -150,7 +150,7 @@ $(function (){
                                     switch (target.attr('type')) {
                                         case 'checkbox':
                                             // 检测是否被选中
-                                            if(key[1] && target.value ===''){
+                                            if(key[1] && !target.prop('checked')){
                                                 target.prop('checked', true)
                                             }
                                             break;
