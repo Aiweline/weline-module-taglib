@@ -97,15 +97,18 @@ $(function (){
                 let target = $(this)
                 // 检查输入框类型
                 let value = target.attr('value')
+                if(!value){
+                    value = target.val()
+                }
                 let scope = target.attr('scope')
                 let name = target.attr('name')
                 switch (target.attr('type')){
                     case 'textarea':
                         value = target.textContent;
                         break;
-                }
-                if(!value){
-                    value = target.val()
+                    case 'checkbox':
+                        value = target.prop('checked')?target.attr('value'):'';
+                        break;
                 }
                 let url = '{$url}'
                     $.ajax({
@@ -150,8 +153,9 @@ $(function (){
                                     switch (target.attr('type')) {
                                         case 'checkbox':
                                             // 检测是否被选中
-                                            if(key[1] && !target.prop('checked')){
-                                                target.prop('checked', true)
+                                            if(key[1]){
+                                                let checked = (key[1]!=='' && key[1]!==0 && key[1]!=='false' && key[1]!=='0' && key[1]!==false)?true:false
+                                                target.prop('checked', checked)
                                             }
                                             break;
                                         case 'textarea':
