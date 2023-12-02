@@ -231,10 +231,13 @@ $(function (){
     public static function document(): string
     {
         return <<<DOC
-<w:data-field w:scope="product" w:target="input" vars="product" name="product[name]" value="{{product.name}}"/>
-scope ： 识别输入scope所指的数据范围。例如：product,标识输入的数据将预存到product。
-target ： 识别输入为target所指的输入框类型。例如：input, 字段将创建input类型的输入框。
-vars ： 传入变量。例如：product, 回填将使用\$product变量提取所需值。
+输入框使用方式：
+<input type="text" value="Demo Product" name="name" scope="product"/>
+页面底部引用：
+<w:data-field url="@backend-url('backend/user-data')" container-id="product-container" event="change click"/>
+url ： 传入url地址，存储数据的地址
+container-id ： 传入容器id，用于自动存储数据时监听的容器范围
+event ： 监听事件,当带有scope="*"的元素触发了此处指定的事件便开始自动保存
 DOC;
 
     }
