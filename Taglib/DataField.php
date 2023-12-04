@@ -102,6 +102,10 @@ $(function (){
                 }
                 let scope = target.attr('scope')
                 let name = target.attr('name')
+                let event = target.attr('event')
+                if(event && e.type !== event){
+                    return
+                }
                 switch (target.attr('type')){
                     case 'textarea':
                         value = target.textContent;
@@ -232,7 +236,7 @@ $(function (){
     {
         return <<<DOC
 输入框使用方式：
-<input type="text" value="Demo Product" name="name" scope="product"/>
+<input type="text" value="Demo Product" name="name" scope="product" event="change click"/>
 页面底部引用：
 <w:data-field url="@backend-url('backend/user-data')" container-id="product-container" event="change click"/>
 url ： 传入url地址，存储数据的地址
