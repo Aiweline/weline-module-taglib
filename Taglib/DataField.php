@@ -103,7 +103,14 @@ $(function (){
                 let scope = target.attr('scope')
                 let name = target.attr('name')
                 let event = target.attr('event')
-                if(event && e.type !== event){
+                let events = target.attr('event').split(' ')
+                let has_event = false
+                for(let event of events){
+                    if(event && e.type == event){
+                        has_event = true
+                    }
+                }
+                if(!has_event){
                     return
                 }
                 switch (target.attr('type')){
