@@ -102,10 +102,15 @@ $(function (){
                 }
                 let scope = target.attr('scope')
                 let name = target.attr('name')
-                let event = target.attr('event')
-                let events = target.attr('event').split(' ')
+                let events = target.attr('event')
+                if(!events){
+                    events = '$event'
+                }
+               
+                events = events.split(' ')
                 let has_event = false
                 for(let event of events){
+                    event = event.trim(' ')
                     if(event && e.type == event){
                         has_event = true
                     }
