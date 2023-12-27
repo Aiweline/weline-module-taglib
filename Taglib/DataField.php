@@ -96,9 +96,10 @@ $(function (){
         scope_eles.on('$event', debounce(function(e){
                 let target = $(this)
                 // 检查输入框类型
-                let value = target.val()
-                if(!value){
-                    value = target.attr('value')
+                let value = target.attr('value')
+                let real_value = target.val()
+                if(real_value){
+                    value = real_value
                 }
                 let scope = target.attr('scope')
                 let name = target.attr('name')
