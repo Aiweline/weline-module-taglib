@@ -113,7 +113,6 @@ $(function (){
                 }
                 // 检查输入框类型
                 let tag = this.tagName.toLowerCase()
-                console.log(tag)
                 let value = '';
                 if(tag === 'input' || tag === 'textarea' || tag === 'select'){
                     value = target.val()
