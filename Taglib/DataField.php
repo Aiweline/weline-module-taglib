@@ -95,14 +95,6 @@ $(function (){
         // jquery检测所有带了scope属性的元素
         scope_eles.on('$event', debounce(function(e){
                 let target = $(this)
-                // 检查输入框类型
-                let value = target.attr('value')
-                let real_value = target.val()
-                if(real_value){
-                    value = real_value
-                }
-                let scope = target.attr('scope')
-                let name = target.attr('name')
                 let events = target.attr('event')
                 if(!events){
                     events = '$event'
@@ -119,10 +111,19 @@ $(function (){
                 if(!has_event){
                     return
                 }
+                // 检查输入框类型
+                let tag = this.tagName.toLowerCase()
+                console.log(tag)
+                let value = '';
+                if(tag === 'input' || tag === 'textarea' || tag === 'select'){
+                    value = target.val()
+                }else{
+                    value = target.attr('value')
+                }
+                let scope = target.attr('scope')
+                let name = target.attr('name')
+                
                 switch (target.attr('type')){
-                    case 'textarea':
-                        value = target.textContent;
-                        break;
                     case 'checkbox':
                         value = target.prop('checked')?target.attr('value'):'';
                         break;
