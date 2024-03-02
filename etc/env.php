@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'router' => 'taglib'
+    'router' => 'taglib',
+    'dependencies' => [
+        'Weline_ModuleManager'
+    ]
 ];
